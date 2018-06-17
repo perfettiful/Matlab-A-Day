@@ -67,4 +67,7 @@ def example_scraper (page_link = 'https://www.mathworks.com/examples/computer-vi
     # you can also access the main_price class by specifying the tag of the class
     #prices = page_content.find_all('div', attrs={'class':'card_container'})
     
+    #Next time: Figure our how to extract URLs from this example
+    #https://stackoverflow.com/questions/5815747/beautifulsoup-getting-href
+    
 ###end example_scraper
