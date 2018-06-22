@@ -37,7 +37,17 @@ def example_scraper (page_link = 'https://www.mathworks.com/examples/computer-vi
     # extract all html elements where price is stored
     link_tags = page_content.find_all(class_='card_container')
     
-    print(link_tags[0])
+    s = str(link_tags[0])
+    
+    firstSearchStr = 'a href="'
+    
+    secondSearchStr = '"'
+    
+    secondStr =  s[s.find(firstSearchStr)+len(firstSearchStr):]
+    
+    finalStr = secondStr[:secondStr.find(secondSearchStr)]
+    
+    return "https://www.mathworks.com" + finalStr
     # Returns following card tag:
     # <div class="card_container explorer_view add_long_title" data-ui-component="card" data-view-count="0" id="example-24078">
     #<a href="/examples/computer-vision/mw/vision-ex30397662-use-local-features">
@@ -69,5 +79,7 @@ def example_scraper (page_link = 'https://www.mathworks.com/examples/computer-vi
     
     #Next time: Figure our how to extract URLs from this example
     #https://stackoverflow.com/questions/5815747/beautifulsoup-getting-href
+    
+    
     
 ###end example_scraper
