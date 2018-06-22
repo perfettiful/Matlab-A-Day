@@ -26,6 +26,22 @@ Created on Sun Jun 17 17:40:22 2018
 from bs4 import BeautifulSoup
 import requests
 
+# urlExtractor() accepts str generated from HTML scraped from BS 
+def urlExtractor (initialStr):
+    firstSearchStr = 'a href="'
+    
+    secondSearchStr = '"'
+    
+    secondStr =  initialStr[initialStr.find(firstSearchStr)+len(firstSearchStr):]
+    
+    finalStr = secondStr[:secondStr.find(secondSearchStr)]
+    
+    return "https://www.mathworks.com" + finalStr
+    
+    
+## end urlExtractor() 
+
+
 ###example_scraper is a fct which consumes a URL with which to scrape all link from
 def example_scraper (page_link = 'https://www.mathworks.com/examples/computer-vision'):
     
@@ -37,17 +53,21 @@ def example_scraper (page_link = 'https://www.mathworks.com/examples/computer-vi
     # extract all html elements where price is stored
     link_tags = page_content.find_all(class_='card_container')
     
-    s = str(link_tags[0])
+    urlArray = []
     
-    firstSearchStr = 'a href="'
+    for element in link_tags :
+        s = str(element)
+        url = urlExtractor(s)
+        urlArray.append(url)
     
-    secondSearchStr = '"'
+    return urlArray
     
-    secondStr =  s[s.find(firstSearchStr)+len(firstSearchStr):]
     
-    finalStr = secondStr[:secondStr.find(secondSearchStr)]
     
-    return "https://www.mathworks.com" + finalStr
+    
+    
+    
+
     # Returns following card tag:
     # <div class="card_container explorer_view add_long_title" data-ui-component="card" data-view-count="0" id="example-24078">
     #<a href="/examples/computer-vision/mw/vision-ex30397662-use-local-features">
